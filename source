@@ -2,6 +2,7 @@
 #include <clocale>
 #include <cmath>
 #include <ctime>
+#include <chrono>
 using namespace std;
 void shell(int* a , int size)
 {
@@ -53,14 +54,33 @@ int main()
 int n;
 	cin >> n;
 	int* a = new int[n];
+	int* b = new int[n];
+	int* c = new int[n];
+	int* d = new int[n];
+	int* e = new int[n];
 	srand(time(0));
 	for (int i = 0; i < n; i++)
 	{
 		a[i] = rand() % n + 1;
+		b[i]=a[i];
+		c[i]=a[i];
+		d[i]=a[i];
+		e[i]=a[i];
+		
 	}
-//shell(a , n);
-//heapSort(a, n);
+int start_shell =  clock();	
+shell(a , n);
+int end_shell = clock();
+int search_shell = end_time - start_time;
+int start_heap =  clock();
+heapSort(b, n);
+int end_heap = clock();
+int search_heap = end_time - start_time;
 
 delete[] a;
+delete[] b;
+delete[] c;
+delete[] d;
+delete[] e;
 return 0;
 }
