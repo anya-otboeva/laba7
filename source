@@ -1,5 +1,38 @@
-#include<iostream>
+#include <iostream>
+#include <clocale>
+#include <cmath>
+#include <ctime>
 using namespace std;
-int min() {
-
+void shell(int* a , int size)
+{
+	int  j, gap, h;
+	gap = size / 2;
+	while (gap>0)
+	{
+		for (int i = 0; i < (size - gap); i++)
+		{
+			j = i;
+			while ((j >= 0) && (a[j] > a[j + gap]))
+			{
+				h = a[j];
+				a[j] = a[j + gap];
+				a[j + gap] = h;
+				j--;
+			}
+		}
+		gap /= 2;
+	}	
+}
+int main()
+{
+int n;
+	cin >> n;
+	int* a = new int[n];
+	srand(time(0));
+	for (int i = 0; i < n; i++)
+	{
+		a[i] = rand() % n + 1;
+	}
+delete[] a;
+return 0;
 }
