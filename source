@@ -124,6 +124,23 @@ int quickSort(int* ar, int lo, int hi)
     int search_quick = end_quick - start_quick;
     return search_quick;
 }
+int insertSort(int array[], int size) 
+{
+    start_insert = clock();
+    for (int step = 1; step < size; step++) {
+        int key = array[step];
+        int j = step - 1;
+        while (key < array[j] && j >= 0) {
+            array[j + 1] = array[j];
+            --j;
+        }
+        array[j + 1] = key;
+    }
+    int end_insert = clock();
+    int search_insert = end_insert - start_insert;
+    return search_insert;
+}
+int search_insert = insertSort(e, n);
 int main()
 {
 	int n;
