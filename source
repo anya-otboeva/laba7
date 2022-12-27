@@ -3,12 +3,13 @@
 #include <cmath>
 #include <ctime>
 #include <chrono>
+#include <fstream>
 using namespace std;
-void shell(int* a , int size)
+void shell(int* a, int size)
 {
 	int  j, gap, h;
 	gap = size / 2;
-	while (gap>0)
+	while (gap > 0)
 	{
 		for (int i = 0; i < (size - gap); i++)
 		{
@@ -22,72 +23,69 @@ void shell(int* a , int size)
 			}
 		}
 		gap /= 2;
-	}	
+	}
 }
 void heapify(int arr[], int n, int i)
 {
-    int largest = i;
-    int left = 2 * i + 1;
-    int right = 2 * i + 2;
-    if (left < n && arr[left] > arr[largest])
-        largest = left;
-    if (right < n && arr[right] > arr[largest])
-        largest = right;
-    if (largest != i)
-    {
-        swap(arr[i], arr[largest]);
-        heapify(arr, n, largest);
-    }
+	int largest = i;
+	int left = 2 * i + 1;
+	int right = 2 * i + 2;
+	if (left < n && arr[left] > arr[largest])
+		largest = left;
+	if (right < n && arr[right] > arr[largest])
+		largest = right;
+	if (largest != i)
+	{
+		swap(arr[i], arr[largest]);
+		heapify(arr, n, largest);
+	}
 }
 void heapSort(int arr[], int n)
 {
-    for (int i = n / 2 - 1; i >= 0; i--)
-        heapify(arr, n, i);
-    for (int i = n - 1; i >= 0; i--)
-    {
-        swap(arr[0], arr[i]);
-        heapify(arr, i, 0);
-    }
+	for (int i = n / 2 - 1; i >= 0; i--)
+		heapify(arr, n, i);
+	for (int i = n - 1; i >= 0; i--)
+	{
+		swap(arr[0], arr[i]);
+		heapify(arr, i, 0);
+	}
 }
 int main()
 {
-int n;
+	int n;
 	cin >> n;
-	int* a = new int[n];
-	int* b = new int[n];
-	int* c = new int[n];
-	int* d = new int[n];
-	int* e = new int[n];
 	ofstream fole;
 	fole.open("output.txt");
 	srand(time(0));
-	fole << "test №  " << " shell " << " heap "<<endl;
+	fole << "test №  " << " shell " << " heap " << endl;
 	for (int t = 0; t < 10; t++)
 	{
+		int* a = new int[n];
+		int* b = new int[n];
+		for (int i = 0; i < n; i++)
+		{
+			a[i] = 0;
+			b[i] = 0;
+			
+		}
 		for (int i = 0; i < n; i++)
 		{
 			a[i] = rand() % n + 1;
-			b[i]=a[i];
-			c[i]=a[i];
-			d[i]=a[i];
-			e[i]=a[i];		
+			b[i] = a[i];
+			
 		}
-		int start_shell =  clock();	
-		shell(a , n);
-		int end_shell = clock();
-		int search_shell = end_shell - start_shell;
-		int start_heap =  clock();
+		double start_shell = clock();
+		shell(a, n);
+		double end_shell = clock();
+		double search_shell = end_shell - start_shell;
+		double start_heap = clock();
 		heapSort(b, n);
-		int end_heap = clock();
-		int search_heap = end_heap - start_heap;
+		double end_heap = clock();
+		double search_heap = end_heap - start_heap;
 		fole << t << "     " << search_shell << "   " << search_heap << endl;
 		delete[] a;
 		delete[] b;
-		delete[] c;
-		delete[] d;
-		delete[] e;
+		
 	}
-	
-	
-return 0;
+	return 0;
 }
