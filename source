@@ -128,7 +128,7 @@ int main()
 		int search_shell= shell(a, n);
 		int search_heap = heapSort(b, n);
 		int search_merge = mergeSort(c, 0, n - 1);
-		fole << t << "     " << search_shell << "   " << search_heap << endl;
+		fole << t << "          " << search_shell << "      " << search_heap << "      "<< search_merge << endl;
 		delete[] a;
 		delete[] b;
 		
