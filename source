@@ -105,6 +105,25 @@ int heapSort(int arr[], int n)
     int end_heap = clock();
     int search_heap = end_heap - start_heap;
 }
+int quickSort(int* ar, int lo, int hi)
+{
+    int start_quick = clock();
+    if (lo < hi) {
+        int p = ar[hi];
+        int i = lo - 1;
+        for (int j = lo; j < hi; ++j)
+            if (ar[j] <= p)
+                swap(ar[++i], ar[j]);
+        if (ar[hi] < ar[i + 1])
+            swap(ar[i + 1], ar[hi]);
+        int prt = i + 1;
+        quickSort(ar, lo, prt - 1);
+        quickSort(ar, prt + 1, hi);
+    }
+    int end_quick = clock();
+    int search_quick = end_quick - start_quick;
+    return search_quick;
+}
 int main()
 {
 	int n;
@@ -120,6 +139,7 @@ int main()
 		int* c = new int[n];
 		int* d = new int[n];
 		int* e = new int[n];
+		int* f = new int[n];
 		for (int i = 0; i < n; i++)
 		{
 			a[i] = rand() % n + 1;
@@ -128,12 +148,14 @@ int main()
 		int search_shell= shell(a, n);
 		int search_heap = heapSort(b, n);
 		int search_merge = mergeSort(c, 0, n - 1);
-		fole << t << "          " << search_shell << "      " << search_heap << "      "<< search_merge << endl;
+		int search_quick = quickSort(d, 0, n - 1);
+		fole << t << "          " << search_shell << "      " << search_heap << "      "<< search_merge << "      "<< search_quick <<  endl;
 		delete[] a;
 		delete[] b;
 		delete[] c;
 		delete[] d;
 		delete[] e;
+		delete[] f;
 		
 	}
 	return 0;
