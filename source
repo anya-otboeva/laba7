@@ -58,29 +58,36 @@ int n;
 	int* c = new int[n];
 	int* d = new int[n];
 	int* e = new int[n];
+	ofstream fole;
+	fole.open("output.txt");
 	srand(time(0));
-	for (int i = 0; i < n; i++)
+	fole << "test №  " << " shell " << " heap "<<endl;
+	for (int t = 0; t < 10; t++)
 	{
-		a[i] = rand() % n + 1;
-		b[i]=a[i];
-		c[i]=a[i];
-		d[i]=a[i];
-		e[i]=a[i];
-		
+		for (int i = 0; i < n; i++)
+		{
+			a[i] = rand() % n + 1;
+			b[i]=a[i];
+			c[i]=a[i];
+			d[i]=a[i];
+			e[i]=a[i];		
+		}
+		int start_shell =  clock();	
+		shell(a , n);
+		int end_shell = clock();
+		int search_shell = end_shell - start_shell;
+		int start_heap =  clock();
+		heapSort(b, n);
+		int end_heap = clock();
+		int search_heap = end_heap - start_heap;
+		fole << t << "     " << search_shell << "   " << search_heap << endl;
+		delete[] a;
+		delete[] b;
+		delete[] c;
+		delete[] d;
+		delete[] e;
 	}
-int start_shell =  clock();	
-shell(a , n);
-int end_shell = clock();
-int search_shell = end_shell - start_shell;
-int start_heap =  clock();
-heapSort(b, n);
-int end_heap = clock();
-int search_heap = end_heap - start_heap;
-
-delete[] a;
-delete[] b;
-delete[] c;
-delete[] d;
-delete[] e;
+	
+	
 return 0;
 }
