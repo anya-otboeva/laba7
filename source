@@ -166,7 +166,7 @@ int main()
 		int search_merge = mergeSort(c, 0, n - 1);
 		int search_quick = quickSort(d, 0, n - 1);
 		int search_insert = insertSort(e, n);
-		fole << t << "          " << search_shell << "      " << search_heap << "      "<< search_merge << "      "<< search_quick <<  endl;
+		fole << t << "          " << search_shell << "      " << search_heap << "      "<< search_merge << "      "<< search_quick << "      "<< search_insert  << endl;
 		delete[] a;
 		delete[] b;
 		delete[] c;
