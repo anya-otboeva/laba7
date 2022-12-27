@@ -58,6 +58,9 @@ int n;
 	{
 		a[i] = rand() % n + 1;
 	}
+//shell(a , n);
+//heapSort(a, n);
+
 delete[] a;
 return 0;
 }
