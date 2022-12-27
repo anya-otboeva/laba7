@@ -140,7 +140,6 @@ int insertSort(int array[], int size)
     int search_insert = end_insert - start_insert;
     return search_insert;
 }
-int search_insert = insertSort(e, n);
 int main()
 {
 	int n;
@@ -166,6 +165,7 @@ int main()
 		int search_heap = heapSort(b, n);
 		int search_merge = mergeSort(c, 0, n - 1);
 		int search_quick = quickSort(d, 0, n - 1);
+		int search_insert = insertSort(e, n);
 		fole << t << "          " << search_shell << "      " << search_heap << "      "<< search_merge << "      "<< search_quick <<  endl;
 		delete[] a;
 		delete[] b;
