@@ -5,11 +5,12 @@
 #include <chrono>
 #include <fstream>
 using namespace std;
-void shell(int* a, int size)
+int shell(int* a , int size)
 {
+	int start_shell = clock();
 	int  j, gap, h;
 	gap = size / 2;
-	while (gap > 0)
+	while (gap>0)
 	{
 		for (int i = 0; i < (size - gap); i++)
 		{
@@ -23,7 +24,10 @@ void shell(int* a, int size)
 			}
 		}
 		gap /= 2;
-	}
+	}	
+	int end_shell = clock();
+	int search_shell = end_shell - start_shell;
+	return search_shell;
 }
 void heapify(int arr[], int n, int i)
 {
@@ -53,31 +57,25 @@ void heapSort(int arr[], int n)
 int main()
 {
 	int n;
-	cin >> n;
+	n = 100000;	
 	ofstream fole;
 	fole.open("output.txt");
 	srand(time(0));
-	fole << "test №  " << " shell " << " heap " << endl;
-	for (int t = 0; t < 10; t++)
+	fole << "test №  " << " shell " << " heap " << " merge " << " quick " << " insert " << endl;
+	for (int t = 0; t < 15; t++)
 	{
 		int* a = new int[n];
 		int* b = new int[n];
-		for (int i = 0; i < n; i++)
-		{
-			a[i] = 0;
-			b[i] = 0;
-			
-		}
+		int* c = new int[n];
+		int* d = new int[n];
+		int* e = new int[n];
 		for (int i = 0; i < n; i++)
 		{
 			a[i] = rand() % n + 1;
 			b[i] = a[i];
-			
-		}
-		double start_shell = clock();
-		shell(a, n);
-		double end_shell = clock();
-		double search_shell = end_shell - start_shell;
+		}		
+		int search_shell= shell(a, n);
+		
 		double start_heap = clock();
 		heapSort(b, n);
 		double end_heap = clock();
