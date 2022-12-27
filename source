@@ -131,6 +131,9 @@ int main()
 		fole << t << "          " << search_shell << "      " << search_heap << "      "<< search_merge << endl;
 		delete[] a;
 		delete[] b;
+		delete[] c;
+		delete[] d;
+		delete[] e;
 		
 	}
 	return 0;
