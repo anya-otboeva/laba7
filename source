@@ -71,11 +71,11 @@ int n;
 int start_shell =  clock();	
 shell(a , n);
 int end_shell = clock();
-int search_shell = end_time - start_time;
+int search_shell = end_shell - start_shell;
 int start_heap =  clock();
 heapSort(b, n);
 int end_heap = clock();
-int search_heap = end_time - start_time;
+int search_heap = end_heap - start_heap;
 
 delete[] a;
 delete[] b;
