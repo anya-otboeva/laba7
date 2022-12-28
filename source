@@ -149,7 +149,7 @@ int main()
 	fole.open("output.txt");
 	srand(time(0));
 	fole << "test №  " << " shell " << " heap " << " merge " << " quick " << " insert " << endl;
-	for (int t = 0; t < 15; t++)
+	for (int t = 0; t < 50; t++)
 	{
 		int* a = new int[n];
 		int* b = new int[n];
