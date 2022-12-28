@@ -5,57 +5,9 @@
 #include <chrono>
 #include <fstream>
 using namespace std;
-void merge(long int* arr[], int p, int q, int r) {
-    int n1 = q - p + 1;
-    int n2 = r - q;
-    long int* L = new long int[n1];
-    long int* M = new long int[n2];
-    for (int i = 0; i < n1; i++)
-        L[i] = arr[p + i];
-    for (int j = 0; j < n2; j++)
-        M[j] = arr[q + 1 + j];
-    int i, j, k;
-    i = 0;
-    j = 0;
-    k = p;
-    while (i < n1 && j < n2) {
-        if (L[i] <= M[j]) {
-            arr[k] = L[i];
-            i++;
-        }
-        else {
-            arr[k] = M[j];
-            j++;
-        }
-        k++;
-    }
-    while (i < n1) {
-        arr[k] = L[i];
-        i++;
-        k++;
-    }
-    while (j < n2) {
-        arr[k] = M[j];
-        j++;
-        k++;
-    }
-}
-double mergeSort(long int* arr[], int l, int r)
+int shell(int* a , int size)
 {
-    double start_merge = clock();
-    if (l < r) {
-        int m = l + (r - l) / 2;
-        mergeSort(arr, l, m);
-        mergeSort(arr, m + 1, r);
-        merge(arr, l, m, r);
-    }
-    double end_merge = clock();
-    double search_merge = end_merge - start_merge;
-    return search_merge;
-}
-double shell(long int* a , int size)
-{
-	double start_shell = clock();
+	int start_shell = clock();
 	int  j, gap, h;
 	gap = size / 2;
 	while (gap>0)
@@ -73,11 +25,11 @@ double shell(long int* a , int size)
 		}
 		gap /= 2;
 	}	
-	double end_shell = clock();
-	double search_shell = end_shell - start_shell;
+	int end_shell = clock();
+	int search_shell = end_shell - start_shell;
 	return search_shell;
 }
-void heapify(long int* arr[], int n, int i)
+void heapify(int arr[], int n, int i)
 {
 	int largest = i;
 	int left = 2 * i + 1;
@@ -90,93 +42,139 @@ void heapify(long int* arr[], int n, int i)
 	{
 		swap(arr[i], arr[largest]);
 		heapify(arr, n, largest);
+	}	
+}
+int heapSort(int arr[], int n)
+{
+	int start_heap = clock();
+	for (int i = n / 2 - 1; i >= 0; i--)
+		heapify(arr, n, i);
+	for (int i = n - 1; i >= 0; i--)
+	{
+		swap(arr[0], arr[i]);
+		heapify(arr, i, 0);
+	}
+	int end_heap = clock();
+	int search_heap = end_heap - start_heap;
+	return  search_heap;
+}
+void merge(int arr[], int p, int q, int r) {
+	int n1 = q - p + 1;
+	int n2 = r - q;
+	int* L = new int[n1];
+	int* M = new int[n2];
+	for (int i = 0; i < n1; i++)
+		L[i] = arr[p + i];
+	for (int j = 0; j < n2; j++)
+		M[j] = arr[q + 1 + j];
+	int i, j, k;
+	i = 0;
+	j = 0;
+	k = p;
+	while (i < n1 && j < n2) {
+		if (L[i] <= M[j]) {
+			arr[k] = L[i];
+			i++;
+		}
+		else {
+			arr[k] = M[j];
+			j++;
+		}
+		k++;
+	}
+	while (i < n1) {
+		arr[k] = L[i];
+		i++;
+		k++;
+	}
+	while (j < n2) {
+		arr[k] = M[j];
+		j++;
+		k++;
 	}
 }
-double heapSort(long int arr[], int n)
+int mergeSort(int arr[], int l, int r)
 {
-    double start_heap = clock();
-    for (int i = n / 2 - 1; i >= 0; i--)
-        heapify(arr, n, i);
-    for (int i = n - 1; i >= 0; i--)
-    {
-        swap(arr[0], arr[i]);
-        heapify(arr, i, 0);
-    }
-    double end_heap = clock();
-    double search_heap = end_heap - start_heap;
+	int start_merge = clock();
+	if (l < r) {
+		int m = l + (r - l) / 2;
+		mergeSort(arr, l, m);
+		mergeSort(arr, m + 1, r);
+		merge(arr, l, m, r);
+	}
+	int end_merge = clock();
+	int search_merge = end_merge - start_merge;
+	return search_merge;
 }
-double quickSort(long int* ar, int lo, int hi)
+int quickSort(int* ar, int lo, int hi)
 {
-    double start_quick = clock();
-    if (lo < hi) {
-        int p = ar[hi];
-        int i = lo - 1;
-        for (int j = lo; j < hi; ++j)
-            if (ar[j] <= p)
-                swap(ar[++i], ar[j]);
-        if (ar[hi] < ar[i + 1])
-            swap(ar[i + 1], ar[hi]);
-        int prt = i + 1;
-        quickSort(ar, lo, prt - 1);
-        quickSort(ar, prt + 1, hi);
-    }
-    double end_quick = clock();
-    double search_quick = end_quick - start_quick;
-    return search_quick;
+	int start_quick = clock();
+	if (lo < hi) {
+		int p = ar[hi];
+		int i = lo - 1;
+		for (int j = lo; j < hi; ++j)
+			if (ar[j] <= p)
+				swap(ar[++i], ar[j]);
+		if (ar[hi] < ar[i + 1])
+			swap(ar[i + 1], ar[hi]);
+		int prt = i + 1;
+		quickSort(ar, lo, prt - 1);
+		quickSort(ar, prt + 1, hi);
+	}
+	int end_quick = clock();
+	int search_quick = end_quick - start_quick;
+	return search_quick;
 }
-double insertSort(long int* array[], int size) 
+int insertSort(int array[], int size) 
 {
-    double start_insert = clock();
-    for (int step = 1; step < size; step++) {
-        int key = array[step];
-        int j = step - 1;
-        while (key < array[j] && j >= 0) {
-            array[j + 1] = array[j];
-            --j;
-        }
-        array[j + 1] = key;
-    }
-    double end_insert = clock();
-    double search_insert = end_insert - start_insert;
-    return search_insert;
+	int start_insert = clock();
+	for (int step = 1; step < size; step++) {
+		int key = array[step];
+		int j = step - 1;
+		while (key < array[j] && j >= 0) {
+			array[j + 1] = array[j];
+			--j;
+		}
+		array[j + 1] = key;
+	}
+	int end_insert = clock();
+	int search_insert = end_insert - start_insert;
+	return search_insert;
 }
 int main()
 {
-	long int n;
-	n = 10000000;	
+	int n;
+	n = 100000;	
 	ofstream fole;
 	fole.open("output.txt");
 	srand(time(0));
 	fole << "test №  " << " shell " << " heap " << " merge " << " quick " << " insert " << endl;
-	for (int t = 0; t < 1000; t++)
+	for (int t = 0; t < 15; t++)
 	{
-		long int* a = new int[n];
-		long int* b = new int[n];
-		long int* c = new int[n];
-		long int* d = new int[n];
-		long int* e = new int[n];
-		long int* f = new int[n];
+		int* a = new int[n];
+		int* b = new int[n];
+		int* c = new int[n];
+		int* d = new int[n];
+		int* e = new int[n];
 		for (int i = 0; i < n; i++)
 		{
-			a[i] = rand() % 100 + 1;
+			a[i] = rand() % n + 1;
 			b[i] = a[i];
 			c[i] = a[i];
 			d[i] = a[i];
 			e[i] = a[i];
 		}		
-		double search_shell= shell(a, n);
-		double search_heap = heapSort(b, n);
-		double search_merge = mergeSort(c, 0, n - 1);
-		double search_quick = quickSort(d, 0, n - 1);
-		double search_insert = insertSort(e, n);
-		fole << t << "          " << search_shell << "      " << search_heap << "      "<< search_merge << "      "<< search_quick << "      "<< search_insert  << endl;
+		int search_shell= shell(a, n);		
+		int search_heap = heapSort(b, n);		
+		int search_merge = mergeSort(c, 0, n - 1);		
+		int search_quick = quickSort(d, 0, n - 1);		
+		int search_insert = insertSort(e, n);
+		fole << t << "     " << search_shell << "   " << search_heap << "   " << search_merge << "   " << search_quick << "   " << search_insert << endl;
 		delete[] a;
 		delete[] b;
 		delete[] c;
 		delete[] d;
 		delete[] e;
-		delete[] f;
-		
-	}
+	}	
 	return 0;
 }
